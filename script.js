@@ -1,4 +1,6 @@
 import { data } from "./data.js";
+import { addToCart } from "./shoppingCart.js";
+import { addToFavourites } from "./favourites.js";
 
 const container = document.getElementById("container");
 const input = document.getElementById("input");
@@ -26,6 +28,8 @@ function render() {
     )
     .map((item) => addItem(item));
   container.append(...items);
+  addToFavourites();
+  addToCart(data);
 }
 
 function addItem(item) {

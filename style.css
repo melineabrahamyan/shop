@@ -1,0 +1,85 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+#input{
+    margin-top: 20px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    height: 20px;
+    width: 150px;
+}
+
+#right-box{
+    position: fixed;
+    right: 30px;
+    background-color: red;
+    height: 30px;
+    width: 150px;
+    align-items: center;
+    cursor: pointer;
+    text-align: center;
+    
+}
+
+#cart{
+   color: white;
+}
+
+#container{
+ display: flex;
+ flex-wrap: wrap;
+ width: 100%;
+ justify-content: center;
+ align-items: center;
+ margin: 50px 0;
+}
+
+.items-div{
+ border: none
+}
+
+.items-div img{
+    
+    height: 250px;
+    width: 100%;
+   margin: 0 auto;
+   text-align: center;
+   display: block;
+    object-fit: contain;
+    cursor: pointer;
+    transition: 0.2s ease;
+    
+}
+
+.items-div:hover{
+    transform: scale(1.04);
+    border: 1px solid red;
+}
+
+.items-div h4{
+    text-align: center;
+}
+
+.cart-button{
+    padding : 2px 4px;
+    margin-left: 280px;
+    margin-top: 30px;
+    cursor: pointer;
+    font-size: 25px;
+    border: none;
+    border-radius: 50%;
+   background: none;
+}
+
+.like-button{
+    padding : 2px 4px;
+    cursor: pointer;
+    font-size: 25px;
+    border: none;
+    border-radius: 50%;
+   background: none;
+}
