@@ -16,7 +16,6 @@ function markRed(button) {
       added = true;
     }
   });
-  return added;
 }
 
 export { addToFavourites };

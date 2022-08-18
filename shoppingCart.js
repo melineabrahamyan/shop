@@ -1,59 +1,68 @@
+let cartItems = [];
+let cartItemsFullDataArray = [];
 function addToCart(data) {
-  let cartItems = [];
-  let itemTitles = [];
   const cartButtons = document.querySelectorAll(".cart-button");
 
   cartButtons.forEach((button, index) => {
     button.addEventListener("click", function () {
-      let i = itemTitles.indexOf(data[index].title); // checks if the item is already in the cart
+      let i = cartItems.indexOf(data[index].title); // checks if the item is already in the cart
       if (i === -1) {
-        cartItems.push({
+        // doesn't exist in the cart => should be added
+        const newItem = {
           title: data[index].title,
           price: data[index].price,
           qunatity: 1,
-        });
+        };
+        addToCartDiv(newItem);
+
+        cartItems.push(newItem.title);
+        cartItemsFullDataArray.push(newItem);
       } else {
-        cartItems[i].qunatity++;
+        // already exists in the cart => the quantity and the price should be increased
+        changeItemData(
+          i,
+          cartItemsFullDataArray[i].title,
+          data[index].price,
+          cartItemsFullDataArray[i].qunatity
+        );
+        cartItemsFullDataArray[i].qunatity++;
       }
-
-      itemTitles = cartItems.map((item) => item.title);
     });
   });
-
-  cartRender(cartItems);
+  cartItems = [];
 }
 
-function cartRender(items) {
-  const cart = document.getElementById("cart-items-list");
-  const cartBox = document.getElementById("right-box");
-  const box = document.createElement("div");
+let cartDiv = document.getElementById("cart-items");
+let cart = document.getElementById("right-box");
+cartDiv.style.display = "none";
 
-  const container = document.getElementById("container");
+function addToCartDiv(item) {
+  const div = document.createElement("div");
+  div.append(`${item.title}, ${item.price}, ${item.qunatity} հատ`);
+  cartDiv.append(div);
+}
 
-  cartBox.addEventListener("click", function () {
-    console.log(items);
+function changeItemData(index, title, priceForOne, qunatity) {
+  let priceNumber = +priceForOne.slice(0, priceForOne.length - 3);
+  let changeQuantity = qunatity + 1;
+  let changedPrice = priceNumber * changeQuantity;
+  cartDiv.children[
+    index
+  ].innerHTML = `${title}, ${changedPrice} դր,  ${changeQuantity} հատ`;
+}
 
-    const itemDivs = items.map((item) => {
-      const itemBox = document.createElement("div");
-
-      const title = document.createElement("span");
-      title.innerText = item.title + " , ";
-
-      const price = document.createElement("span");
-      price.innerText = item.price + ",  ";
-
-      const qunatity = document.createElement("span");
-      qunatity.innerText = item.qunatity + " հատ";
-
-      itemBox.append(title, price, qunatity);
-      box.append(itemBox);
-      cart.append(box);
-
-      container.addEventListener("click", function () {
-        box.innerHTML = "";
-      });
-    });
+let isCartShown = false;
+function showCart() {
+  cart.addEventListener("click", function () {
+    window.scrollTo(0, 0);
+    if (isCartShown) {
+      cartDiv.style.display = "block";
+      isCartShown = false;
+    } else {
+      cartDiv.style.display = "none";
+      isCartShown = true;
+    }
   });
 }
 
-export { addToCart };
+export { addToCart, showCart };
