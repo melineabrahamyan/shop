@@ -12,7 +12,7 @@ function markRed(button) {
       button.style.color = "black";
       added = false;
     } else {
-      button.style.color = "red";
+      button.style.color = "#E12E2EFF";
       added = true;
     }
   });
